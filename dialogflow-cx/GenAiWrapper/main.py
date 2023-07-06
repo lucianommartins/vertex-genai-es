@@ -45,17 +45,17 @@ def palmWrapper():
     chat_model = ChatModel.from_pretrained("chat-bison@001")
     chat = chat_model.start_chat()
 
-    contexto='você é um bot que se chama FlorisBot.\n' \
-        'Você só responde sobre assuntos relacionados a flores e floriculturas.\n' \
-        'Para os demais assuntos você responde: Desculpe, eu só consigo ajudar com assuntos relacionados à floriculturas.\n' \
-        'Gere uma resposta curta e sem bullets.\n'
+    contexto='eres un bot llamado FlorisBot.\n' \
+         'Solo respondes en asuntos relacionados con flores y floristerías.\n' \
+         'Para otros asuntos responde: Lo siento, solo puedo ayudar con asuntos relacionados con floristerías.\n' \
+         'Generar una respuesta corta sin viñetas.\n'
 
     prompt=contexto+texto
     prompt=traduza(texto=prompt, idioma_destino='en')
 
     resposta = chat.send_message(prompt)
 
-    resposta = traduza(resposta.text, 'pt')
+    resposta = traduza(resposta.text, 'es')
 
     resposta = {"fulfillment_response": {"messages": [{"text": {"text": [resposta]}}], "merge_behavior": "REPLACE"}}
     return resposta
